@@ -64,7 +64,7 @@ backup ()
     die "INTERNAL ERROR: backup requires exactly one file to back up"
   fi
   ORIG_FILE=$1
-  BACKUP_FILE=$ORIG_FILE.openfoam-$(date +%F)-bak
+  BACKUP_FILE=$ORIG_FILE.openfoam.$(date +%F).save
   log "Backing up $ORIG_FILE to $BACKUP_FILE"
   $ROOT_CMD cp -a --backup=t $ORIG_FILE $BACKUP_FILE
 }
