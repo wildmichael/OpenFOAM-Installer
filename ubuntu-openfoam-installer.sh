@@ -119,5 +119,18 @@ sudo apt-get update
 log "Installing OpenFOAM."
 sudo apt-get install openfoam211 paraviewopenfoam3120
 
+log "Installing /etc/profile.d/openfoam.sh"
+TMPFILE=$(mktemp)
+cat > $TMPFILE << EOF
+# OpenFOAM shell initialization file
+
+if [ \$(id -u) -ne 0 ]; then
+  source /opt/openfoam211/etc/bashrc
+fi
+EOF
+sudo cp --backup=t $TMPFILE /etc/profile.d/openfoam.sh
+sudo chmod 0644 /etc/profile.d/openfoam.sh
+rm -f $TMPFILE
+
 # Et voila, c'est tous
 log "Done."

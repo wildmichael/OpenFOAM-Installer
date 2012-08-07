@@ -19,12 +19,6 @@ you want to install the openfoam211 and paraviewopenfoam3120 packages and their
 dependencies. Do the same when asked if you really want to install
 unauthenticated packages.
 
-In order to set up your environment to recognize the OpenFOAM installation,
-type the following into the terminal window:
-
-    cp -f --backup=t ~/.bashrc ~/.bashrc.bak
-    echo "source /opt/openfoam211/etc/bashrc" >> ~/.bashrc
-
 To finish, close the terminal window and open a new one for the changes to take
 effect.
 
