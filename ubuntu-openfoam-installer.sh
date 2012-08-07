@@ -65,13 +65,8 @@ backup ()
   fi
   ORIG_FILE=$1
   BACKUP_FILE=$ORIG_FILE.openfoam-$(date +%F)-bak
-  BACKUP_NUM=0
-  while [ -e ${BACKUP_FILE}${BACKUP_NUM} ]; do
-    BACKUP_NUM=$(expr $BACKUP_NUM + 1)
-  done
-  BACKUP_FILE=${BACKUP_FILE}${BACKUP_NUM}
   log "Backing up $ORIG_FILE to $BACKUP_FILE"
-  $ROOT_CMD cp -a $ORIG_FILE $BACKUP_FILE
+  $ROOT_CMD cp -a --backup=t $ORIG_FILE $BACKUP_FILE
 }
 
 ###############################################################################
