@@ -4,7 +4,7 @@ OpenFOAM<sup>&reg;</sup> Installer for Ubuntu
 This script helps new users to install OpenFOAM on Ubuntu (including Kubuntu,
 Xubuntu etc.). Currently, the following versions are supported:
 
-* 10.04 (Lucid Lynx)
+* 10.04 LTS (Lucid Lynx)
 * 11.04 (Natty Narwhal)
 * 11.10 (Oneiric Ocelot)
 * 12.04 LTS (Precise Pangolin)
