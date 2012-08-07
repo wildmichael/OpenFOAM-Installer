@@ -28,7 +28,7 @@ type the following into the terminal window:
 To finish, close the terminal window and open a new one for the changes to take
 effect.
 
-That's it, you're ready to FOAM!
+That's it, you're ready to **FOAM**!
 
 -------------------------------------------------------------------------------
 
