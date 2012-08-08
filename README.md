@@ -15,10 +15,7 @@ type `gnome-terminal`) and type the following (best by copy-pasting)
 
     sh <(wget -qO - https://raw.github.com/themiwi/OpenFOAM-Ubuntu-Installer/master/ubuntu-openfoam-installer.sh)
 
-and enter your password when prompted and press <kbd>y</kbd>+<kbd>Enter</kbd>
-when asked whether you want to install the `openfoam211` and
-`paraviewopenfoam3120` packages and their dependencies. Do the same when asked
-if you really want to install unauthenticated packages.
+and follow the instructions displayed on the screen.
 
 To finish, close the terminal window and open a new one for the changes to take
 effect.
