@@ -42,7 +42,7 @@ die ()
 # Function to report progress
 log ()
 {
-  echo "*** $@"
+  echo "$@"
 }
 
 # Function to backup a file. The -s switch uses sudo to create the copy.
