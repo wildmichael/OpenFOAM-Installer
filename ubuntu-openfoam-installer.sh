@@ -45,6 +45,43 @@ log ()
   echo "$@"
 }
 
+# Function to ask a yes/no question from the user. -n make "no" the default, -y
+# "yes". If not specified, -n is assumed. Exits with 0 if "y" was answered,
+# with 1 if "n" was the input.
+askyesno ()
+{
+  DEFAULT=n
+  while [ $# -gt 1 ]; do
+    case $1 in
+      -n)
+        shift
+        break
+        ;;
+      -y)
+        DEFAULT=y
+        shift
+        ;;
+      *)
+        break
+        ;;
+    esac
+  done
+  if [ $# -lt 1 ]; then
+    die "INTERNAL ERROR: askyesno requires a prompt message"
+  fi
+  while true; do
+    read -p "$@" ans
+    case "${ans:-$DEFAULT}" in
+      y)
+        return 0
+        ;;
+      n)
+        return 1
+        ;;
+    esac
+  done
+}
+
 # Function to backup a file. The -s switch uses sudo to create the copy.
 backup ()
 {
@@ -72,6 +109,9 @@ backup ()
 ###############################################################################
 # Here goes the actual main script
 ###############################################################################
+
+# Make sure we read from the tty
+exec 0</dev/tty
 
 # Check whether lsb_release is available (not all distros have it)
 log "Checking for lsb_release."
@@ -102,7 +142,13 @@ esac
 SRCS_LIST=/etc/apt/sources.list.d/openfoam.list
 log "Checking for existing $SRCS_LIST."
 if [ -f $SRCS_LIST ]; then
-  backup -s $SRCS_LIST
+  echo "The file $SRCS_LIST already exists."
+  if askyesno -y "Continue and overwrite it [Y/n]?"
+  then
+    backup -s $SRCS_LIST
+  else
+    exit 0
+  fi
 fi
 
 # Write the new sources.list file, update the cache and install OpenFOAM.
@@ -119,18 +165,34 @@ sudo apt-get update
 log "Installing OpenFOAM."
 sudo apt-get install openfoam211 paraviewopenfoam3120
 
-log "Installing /etc/profile.d/openfoam.sh"
-TMPFILE=$(mktemp)
-cat > $TMPFILE << EOF
+log "Installation of OpenFOAM is finished."
+if askyesno -y "Create /etc/profile.d/openfoam.sh [Y/n]?"; then
+  log "Installing /etc/profile.d/openfoam.sh"
+  TMPFILE=$(mktemp)
+  cat > $TMPFILE << EOF
 # OpenFOAM shell initialization file
-
+# Automatically generated on $(date -R)
 if [ \$(id -u) -ne 0 ]; then
   source /opt/openfoam211/etc/bashrc
 fi
 EOF
-sudo cp --backup=t $TMPFILE /etc/profile.d/openfoam.sh
-sudo chmod 0644 /etc/profile.d/openfoam.sh
-rm -f $TMPFILE
+  sudo cp --backup=t $TMPFILE /etc/profile.d/openfoam.sh
+  sudo chmod 0644 /etc/profile.d/openfoam.sh
+  rm -f $TMPFILE
+  log "************************************************"
+  log "*** Close this terminal and open a new one   ***"
+  log "*** for the changes to take effect           ***"
+  log "************************************************"
+else
+  log "************************************************"
+  log "*** To use OpenFOAM please add               ***"
+  log "***                                          ***"
+  log "***   source /opt/openfoam211/etc/bashrc     ***"
+  log "***                                          ***"
+  log "*** to your ~/.bashrc file.                  ***"
+  log "************************************************"
+fi
 
 # Et voila, c'est tous
 log "Done."
+exit 0
