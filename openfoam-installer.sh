@@ -23,10 +23,10 @@
 #     along with OpenFOAM.  If not, see <http://www.gnu.org/licenses/>.
 #
 # Script
-#     ubuntu-openfoam-installer.sh
+#     openfoam-installer.sh
 #
 # Description
-#     Install OpenFOAM on Ubuntu.
+#     Install OpenFOAM on Ubuntu, Fedora and OpenSUSE.
 #------------------------------------------------------------------------------
 
 # Bail out on error
