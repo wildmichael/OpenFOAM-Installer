@@ -19,11 +19,11 @@ copy-pasting)
 
 **Ubuntu and OpenSUSE**
 
-    sh <(wget -qO - https://raw.github.com/themiwi/OpenFOAM-Ubuntu-Installer/master/openfoam-installer.sh)
+    sh <(wget -qO - https://raw.github.com/themiwi/OpenFOAM-Installer/master/openfoam-installer.sh)
 
 **Fedora**
 
-    sh <(curl -fsSk https://raw.github.com/themiwi/OpenFOAM-Ubuntu-Installer/master/openfoam-installer.sh)
+    sh <(curl -fsSk https://raw.github.com/themiwi/OpenFOAM-Installer/master/openfoam-installer.sh)
 
 Then follow the instructions displayed on the screen. To finish, log out and
 back in for the changes to take effect.
