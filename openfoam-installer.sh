@@ -117,6 +117,9 @@ install_ubuntu ()
   case "$VERS" in
     lucid|natty|oneiric|precise)
       ;;
+    12.10)
+      VERS=precise
+      ;;
     *)
       die "Ubuntu '$VERS' is not supported by this installer."
       ;;
@@ -242,7 +245,8 @@ log "Checking operating system requirements."
 DIST=
 VERS=
 if [ -r /etc/os-release ]; then
-  DIST=$(awk -F= '/^NAME/{print $2}' /etc/os-release)
+  DIST=$(awk -F= '/^NAME/{print gensub(/[^a-zA-Z0-9._-]/, "", "g", $2)}' \
+    /etc/os-release)
   VERS=$(awk -F= '/^VERSION_ID/{print gensub(/[^a-zA-Z0-9._-]/, "", "g", $2)}' \
     /etc/os-release)
 elif which lsb_release >/dev/null 2>&1; then
