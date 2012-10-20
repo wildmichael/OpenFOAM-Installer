@@ -10,6 +10,7 @@ Currently, the following versions are supported:
 * Ubuntu 11.04 (Natty Narwhal)
 * Ubuntu 11.10 (Oneiric Ocelot)
 * Ubuntu 12.04 LTS (Precise Pangolin)
+* Ubuntu 12.10 (Quantal Quetzal)
 * OpenSUSE 12.1 (Asparagus)
 * Fedora 16 (Verne)
 * Fedora 17 (Beefy Miracle)
